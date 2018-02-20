@@ -50,7 +50,10 @@ module.exports = (piece, current) =>
     listen(piece.entry)
     .then (stopListen) =>
       unless canceled
-        requireStr src, piece.name
+        try
+          requireStr src, piece.name
+        catch e
+          console.error e
         stopListen()
         {callTest, getTestLine, getTestSource, getTestFile, cleanUp} = global.snapy
         piece._tests.reduce ((acc, curr, i) =>
