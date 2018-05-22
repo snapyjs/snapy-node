@@ -77,5 +77,3 @@ module.exports = (piece, current) =>
           ]
           .catch (e) => console.error e
           .then stopListen
-
-        

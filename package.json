@@ -21,18 +21,18 @@
     "shrinkwrap.yaml"
   ],
   "dependencies": {
-    "fs-extra": "^5.0.0",
+    "fs-extra": "^6.0.1",
     "handle-that": "^0.1.3",
-    "offset-sourcemap-lines": "^1.0.0",
-    "require-from-string": "^2.0.1",
-    "source-map-support": "^0.5.3"
+    "offset-sourcemap-lines": "^1.0.1",
+    "require-from-string": "^2.0.2",
+    "source-map-support": "^0.5.6"
   },
   "devDependencies": {
     "coffee-cli": "^0.2.1",
     "coffee-loader": "^0.9.0",
-    "read-conf": "^0.4.1",
+    "read-conf": "^0.4.2",
     "script-runner": "^0.1.7",
-    "snapy": "^0.1.0"
+    "snapy": "^0.1.2"
   },
   "keywords": [],
   "readmeFilename": "README.md",
