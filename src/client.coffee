@@ -15,7 +15,7 @@ module.exports = (snapy) ->
     global.process.send obj 
 
   snapy.fs = require "fs-extra"
-
+  snapy.chalk = require "chalk"
   snapy.getCache.hookIn (o) ->
     message "getCache", key:o.key
     .then ({cache}) -> o.oldState = cache
