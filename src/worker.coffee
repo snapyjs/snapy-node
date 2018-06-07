@@ -42,9 +42,14 @@ module.exports = (piece, current) =>
       origin = file + if line then ":"+line else ""
       try
         process.send listen: {origin: origin, testSource: source, testLine: line}
+      listener = (err) => console.error err
+      process.on "uncaughtException", listener
+      process.on "unhandledRejection", listener
       listening = => 
         resolve => new Promise (resolve) => 
           stoppedListening = => resolve()
+          process.off "uncaughtException", listener
+          process.off "unhandledRejection", listener
           try
             process.send stopListen: true
     listen(piece.entry)

@@ -60,9 +60,9 @@ module.exports =
         workers = []
         cancel.hookIn =>
           for worker in workers
-            try
+            if worker.connected
               worker.send cancel: true
-        await handleThat changedChunks, 
+        return handleThat changedChunks, 
           worker: path.resolve(__dirname, "./worker")
           object: "tests"
           flatten: false 

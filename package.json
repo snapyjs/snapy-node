@@ -17,8 +17,7 @@
   },
   "main": "lib/server.js",
   "files": [
-    "lib/*.js",
-    "shrinkwrap.yaml"
+    "lib/*.js"
   ],
   "dependencies": {
     "fs-extra": "^6.0.1",
