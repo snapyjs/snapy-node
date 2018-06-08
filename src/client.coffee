@@ -26,11 +26,8 @@ module.exports = (snapy) ->
 
   snapy.ask.hookIn (o) -> 
     message "ask", o
-    .then (o) ->
-      unless o.correct
-        o.stderr = ["state not correct" ]
-        throw o
-
-  snapy.success.hookIn (o) -> global.process.send success: o
-  
-  snapy.fail.hookIn (o) -> global.process.send fail: o
+    .then ({success,stderr}) -> 
+      o.success = success
+      o.stderr = stderr
+        
+  snapy.report.hookIn (o) -> global.process.send report: o

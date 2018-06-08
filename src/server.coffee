@@ -6,9 +6,7 @@ module.exports =
     {
     run,
     cache
-    success,
-    fail,
-    std,
+    report,
     status,
     print,
     config,
@@ -102,16 +100,14 @@ module.exports =
               else if o.ask
                 ask(o.ask).then worker.send.bind(worker)
                 .catch =>
-              else if o.success
-                success(o.success)
-              else if o.fail
-                fail(o.fail)
+              else if o.report
+                report(o.report)
               else if o.listen
                 stopListen = listen(o.listen)
                 worker.send listening: true 
               else if o.stopListen
                 output = stopListen()
-                std(output) if output
+                report(output) if output
                 worker.send stoppedListening: true
       
 module.exports.configSchema =
