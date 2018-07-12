@@ -69,27 +69,6 @@ module.exports =
           onProgress: (remaining) => status "#{remaining} test chunks remaining..."
           onFork: (worker) =>
             workers.push worker
-            listen = (o) => 
-              closeAll = ["stdout","stderr"].map (stdname) =>
-                lines = []
-                stdpipe = worker[stdname]
-                stdpipe.setEncoding("utf8")
-                listener = (data) =>
-                  concat lines, data.split("\n")
-                  lines.pop() if lines[lines.length-1] == ""
-                stdpipe.on "data", listener
-                return [stdname, =>
-                  stdpipe.removeListener "data", listener
-                  return lines if lines.length > 0
-                  return null
-                ]
-              return => 
-                result = closeAll.reduce ((acc,[name,close]) =>
-                  acc[name] = lines if lines = close()
-                  return acc
-                  ), o
-                return result if result.stdout or result.stderr
-            stopListen = null
             worker.on "message", (o) =>
               if o.getCache
                 cache.get(o.getCache).then worker.send.bind(worker)
@@ -102,13 +81,6 @@ module.exports =
                 .catch =>
               else if o.report
                 report(o.report)
-              else if o.listen
-                stopListen = listen(o.listen)
-                worker.send listening: true 
-              else if o.stopListen
-                output = stopListen()
-                report(output) if output
-                worker.send stoppedListening: true
       
 module.exports.configSchema =
   webpack$target:
